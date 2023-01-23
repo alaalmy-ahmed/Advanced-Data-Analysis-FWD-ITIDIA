@@ -1,0 +1,42 @@
+-- Query One
+SELECT c.Country, SUM(i.total) Countries_totals
+FROM Customer c
+JOIN Invoice i
+ON c.CustomerId = i.CustomerId
+GROUP BY c.Country
+ORDER BY 2 DESC;
+
+
+-- Query Two
+SELECT FirstName, LastName, SUM(total) AS Total_purchase
+FROM Customer c
+JOIN Invoice i
+on c.CustomerId = i.CustomerId
+GROUP BY FirstName, LastName
+ORDER BY Total_purchase DESC
+LIMIT 10;
+
+
+
+-- QUERY Three
+SELECT a.Name Artist_name, COUNT(al.AlbumId) NO_albums
+FROM Artist a
+JOIN Album al
+ON a.ArtistId = al.ArtistId
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10;
+
+
+-- Query Four
+SELECT a.Name, sum(il.UnitPrice * il.Quantity) Total
+FROM Artist a
+JOIN Album al
+ON a.ArtistId = al.ArtistId
+JOIN Track t
+ON t.AlbumId = al.AlbumId
+JOIN InvoiceLine il
+ON il.TrackId = t.TrackId
+GROUP BY a.Name
+ORDER BY Total DESC
+LIMIT 10;
